@@ -1,0 +1,8 @@
+{% extends "encyclopedia/layout.html" %}
+{%block title%}
+    {{name}}
+{%endblock%}
+{%block body%}
+    {{contents|safe}}
+    <a href="http://127.0.0.1:8000/edit/{{name}}">Edit Page</a>
+{%endblock%}
