@@ -1,0 +1,17 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>users</title>
+    </head>
+    <body>
+        {%if message%}
+            <div>{{message}}</div>
+        {%endif%}
+        <form action="{%url 'login'%}" method="POST">
+            {%csrf_token%}
+            <input type="text", name="username", placeholder="username">
+            <input type="password", name="password">
+            <input type="submit", value="login">
+        </form>
+    </body>
+</html>

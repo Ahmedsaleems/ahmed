@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>
+            users
+        </title>
+    </head>
+    <body>
+        <h1>
+            hello, {{request.user.firstname}}
+        </h1>
+        <ul>
+            <li>
+                username: {{request.user.username}}
+            </li>
+            <li>
+                email: {{request.user.email}}
+            </li>
+        </ul>
+        <a href="{%url 'logout'%}">log out</a>
+    </body>
+</html>
