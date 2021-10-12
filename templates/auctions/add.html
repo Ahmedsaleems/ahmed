@@ -1,0 +1,7 @@
+{% extends "auctions/item.html" %}
+{% block watchlist %}
+    <form method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button style="background-color: lightgreen; position: absolute; right: 0;" type="submit" name="addwatchlist" value="">Add To Watchlist</button>
+    </form>
+{% endblock %}

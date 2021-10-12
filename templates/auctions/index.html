@@ -1,0 +1,64 @@
+{% extends "auctions/layout.html" %}
+
+{% block body %}
+    <style>
+        .abc {
+            color: yellow;
+        }
+    </style>
+    <h2 style="color: black;">Active Listings</h2>
+    {% for i in auction %} 
+        <ul>
+            <li>
+                {% if i.image %}
+                   <img style="display: inline-block; padding-top: 25px;" src="{{i.image}}" alt="" width="25%"> 
+                &nbsp;
+                <div style="position: absolute; left: 30%; display: inline-block; width: 300px;">
+                    <div style=" color: gold; font-size: 25px; text-decoration-line: underline; 
+                    background: linear-gradient(to right, red, green); width: 200px;">{{i.title}}</div><br>
+                <div style="color: black; ">Description: </div> <span class="abc">{{i.description}}</span> <br>
+                <div style="color: black;">Startingprice: </div> <span class="abc">{{i.startingbid}}$</span> <br>
+                {% for j in y %}
+                    {% if i == j.itemid %}
+                       <div style="color: black;">Current Bid: </div> <span class="abc">{{j.bidamount}}$</span> <br>
+                    {% endif %}
+                {% endfor %}
+                {% for j in z %}
+                    {% if i == j %}
+                        <div style="color: darkgreen;">No Bids Yet</div> 
+                    {% endif %}
+                {% endfor %}
+                <div style="color: dodgerblue;">
+                    <a style="color: red; text-decoration-line: underline;" href="{% url 'auctionitem' i.title %}">Click Here</a><span style="color: maroon;"> To View The Details</span> 
+                </div>  
+                
+                </div>
+                <br><br><br><br>
+                {% else %}
+                <div style="display: inline-block; color: red; padding-top: 10%;">No Image</div>
+                <div style="position: absolute; left: 30%; display: inline-block; width: 300px;">
+                    <div style="color: gold; font-size: 50px; text-decoration-line: underline; background-image: linear-gradient(to right, red, yellow);">{{i.title}}</div><br>               
+                <div style="color: black;">Description: </div><span class="abc">{{i.description}}</span>  <br>
+                <div style="color: black;">Startingprice: </div><span class="abc">{{i.startingbid}}$</span>  <br>
+                {% for j in y %}
+                    {% if i == j.itemid %}
+                       <div style="color: black;">Current Bid: </div><span class="abc">{{j.bidamount}}$</span>  <br>
+                    {% endif %}
+                {% endfor %}
+                {% for j in z %}
+                    {% if i == j %}
+                       <div style="color: darkgreen;">No Bids Yet</div> 
+                    {% endif %}
+                {% endfor %}
+                <div>
+                    <a style="color: red; text-decoration-line: underline;" href="{% url 'auctionitem' i.title %}">Click Here</a><span style="color: maroon;"> To View the Details</span> 
+                </div>
+                
+                {% endif %}
+                
+                </div>
+                <br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}

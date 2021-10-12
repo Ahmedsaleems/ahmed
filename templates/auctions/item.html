@@ -1,0 +1,100 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+    {{item.title}}
+{% endblock %}
+{% block body %}
+    <style>
+        #a {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+            text-align: center;
+            font-size: 50px;
+        }
+        #c, #d, #e, #f {
+            color: blue;
+            font-family: 'Courier New', Courier, monospace;
+        }
+        #f {
+            font-size: 40px;
+            text-decoration-line: underline;
+        }
+        #aa {
+            margin-left: auto;
+            margin-right: auto;
+            display: block;
+        }
+        #e {
+            font-size: 40px; display: inline-block;
+        }
+        .aa {
+            color: black;
+        }
+        .ab {
+            color: azure;
+            text-decoration-line: underline;
+        }
+    </style>
+    {% if winner %}
+        <h1 class="ab">{{item.title}}</h1>
+        <h6 class="aa">The Auction Listing You Are Visiting Have Been Closed.</h6><br>
+        <h6 class="aa">The Winner Is {{winner.user_id.username}}</h6>
+    {% else %}
+    <div>
+        <h1 id="a"><span style="background-color: darkslategrey; color: gainsboro;">{{item.title}}</span></h1>
+        {% if creator.user_id %}
+            {% if creator.user_id == user %}
+                <form method="POST" style="display: inline-block;">
+                    {% csrf_token %}
+                    <input style="position: absolute; right: 0; background-color: maroon;" type="submit" name="closelisting" value="Close Listing">
+                </form>
+            {% endif %}
+        {% endif %}
+        <br><br>
+        {% if item.image %}
+            <img id="aa" src="{{item.image}}" alt="img" width="50%">
+        {% endif %}
+        {% if bid %}
+            <div style="font-weight: bolder; font-size: 40px; display: inline-block; color: black;">{{bid.bidamount}}$</div>
+        {% else %}
+           <di style="font-size: large; color: black;">No Bids Yet</div> 
+        <div style="font-weight: bolder; font-size: 40px; display: inline-block; color: black;">{{item.startingbid}}$</div>
+        {% endif %}
+        {% if user.is_authenticated %}
+            {% block watchlist %}
+            {% endblock %}
+        {% endif %}
+        <br>        
+        {% if user.is_authenticated %}
+            <form method="POST" style="position: absolute; right: 0;">
+                {% csrf_token %}
+                <label id="d" for="bid">Bid </label>
+                <input type="number" name="bid" id="bid" min="{{bid.bidamount}}" placeholder="Enter Your Bid Amount" value="">
+                <input type="submit" value="Place Bid">
+            </form>
+        {% endif %}            
+        <br><br><br>
+        <div style="font-size: 40px; color: grey; display: block; background-color: lightgray;">{{item.description}}</div> <br>
+        {% if item.category %}
+            <div style="background-color: lightpink;"><h6 id="e">Category:</h6> <div style="display: inline-block; font-size: 30px;">{{item.category}}</div></div>
+        {% else %}
+            <div style="background-color: lightpink;">No Category listed</div>    
+        {% endif %}
+        </div>
+        <br><br>
+
+    <h6 id="f">Comments</h6><br>
+        {% for k in comments %}
+            <div style="color: white">
+            <h6 style="display: inline-block;">{{k.user_id.username}}:</h6>
+            {{k.comment}}
+            </div>
+        {% endfor %}
+        <br><br>
+    {% if user.is_authenticated %}
+        <form method="POST">
+            {% csrf_token %}
+            <input type="text" name="comment" placeholder="Type Your Comment">
+            <input type="submit">
+        </form>
+    {% endif %}
+    {% endif %}
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+    Create Auction
+{% endblock %}
+{% block body %}
+<style>
+    label {
+        color: black;
+    }
+    h1 {
+        color: black;
+    }
+</style>
+    <h1>Create New Page</h1>
+    <form method="POST">
+        {% csrf_token %}
+        <label for="title">Title:</label>
+        <input style="margin-left: 110px;" type="text" name="title" id="title" placeholder="Title"><br>
+        <label for="description">Description:</label>
+        <input style="margin-left: 60px;" type="text" name="description" id="description" placeholder="Description"> <br>
+        <label for="startingbid">Starting Price:</label>
+        <input style="margin-left: 45px;" type="number" min="0" name="startingbid" id="startingbid" placeholder="Starting Price(In USD)"> <br>
+        <label for="category">Category:</label>
+        <input style="margin-left: 75px;" type="text" name="category" id="category" placeholder="Category Of Item(Optional)"> <br>
+        <label for="image">URL Of Image:</label>
+        <input style="margin-left: 40px;" type="url" name="image" id="image", placeholder="URL Of Image(Optional)"> <br>
+        <input style="margin-left: 200px;" type="submit" value="submit">
+    </form>
+{% endblock %}

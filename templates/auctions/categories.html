@@ -1,0 +1,26 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+    Categories
+{% endblock %}
+{% block body %}
+    <style>
+        #c {
+            color: yellow;
+            text-decoration-line: underline;
+        }
+        #b::before {
+            content: "\2022";
+            color: red;
+        }
+        #a {
+            list-style: none;
+        }
+    </style>
+    {% for j in x %}
+        <ul id="a">
+            <li id="b">
+                <a id="c" href="{% url 'i_category' j.categoryname %}">{{j.categoryname}}</a>
+            </li>
+        </ul>
+    {% endfor %}
+{% endblock %}

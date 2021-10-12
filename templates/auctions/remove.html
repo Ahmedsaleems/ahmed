@@ -1,0 +1,7 @@
+{% extends "auctions/item.html" %}
+{% block watchlist %}
+    <form method="POST" style="display: inline;">
+        {% csrf_token %}
+        <button style="background-color: red; position: absolute; right: 0;" name="removewatchlist" type="submit" value="">Remove From Watchlist</button>
+    </form>
+{% endblock %}

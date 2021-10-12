@@ -1,0 +1,8 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+    ERROR
+{% endblock %}
+{% block body %}
+    <h4 style="color: black;">ERROR. The bidding amount must be greater than Current Bid Amount.</h4>
+    <a href="{% url 'auctionitem' item.title %}">Go Back To Listing Page</a>
+{% endblock %}

@@ -1,0 +1,74 @@
+{% extends "auctions/layout.html" %}
+{% block title %}
+    Items With Categories
+{% endblock %}
+{% block body %}
+<style>
+    .title {
+        color: yellow;
+        text-decoration-line: underline;
+    }
+    .head {
+        color: black;
+        display: inline-block;
+    }
+    .description {
+        color: chocolate;
+        display: inline-block;
+    }
+</style>
+    {% if not itemsss %}
+        <h1 style="color: red;">No Active Listings</h1>
+    {% endif %}
+    {% for i in itemsss %}
+    <ul>
+        <li>
+            {% if i.image %}
+            <img style="display: inline-block;" src="{{i.image}}" alt="" width="25%">
+            <div style="position: absolute; left: 30%; display: inline-block;">
+                <h6 class="title">{{i.title}}</h6><br>
+          <span class="head">Description: </span>
+          <span class="description">{{i.description}}</span>  <br>
+            {% for j in bid %}
+                {% if j.itemid == i %}
+                   <span class="head">Current Bid: </span>
+                   <span class="description">{{j.bidamount}}</span> 
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% for k in notbid %}
+                {% if k == i %}
+                    Starting Price: {{i.startingbid}}
+                    <div style="color: red;">No Bidding Yet</div>
+                {% endif %}
+            {% endfor %}
+            <a style="color: red; text-decoration-line: underline;" href="{% url 'auctionitem' i.title %}">Click Here</a>
+            <span style="color: maroon;"> To View the Details</span>
+            </div>
+            {% else %}
+            <div style="color: red; display: inline-block; padding-top: 4%">No Image</div>
+            <div style="position: absolute; left: 30%; display: inline-block">
+            <h6 class="title">{{i.title}}</h6>
+            <div class="head">Description: </div> <div class="description">{{i.description}}</div>
+            {% for j in bid %}
+                {% if j.itemid == i %}
+                    <div class="head">Current Bid: </div> <div class="description">{{j.bidamount}}</div>
+                {% endif %}
+            {% endfor %}
+            <br>
+            {% for k in notbid %}
+                {% if k == i %}
+                    <div class="head">Starting Price: </div> <div class="description">{{i.startingbid}}</div>
+                    <div style="color: red;">No Bidding Yet</div>
+                {% endif %}
+            {% endfor %}
+                <a style="color: red; text-decoration-line: underline;" href="{% url 'auctionitem' i.title %}">Click Here</a>
+                <span style="color: maroon;"> To View the Details</span> 
+            </div>
+               
+            {% endif %}
+        </li>
+        <br><br><br>
+    </ul>
+    {% endfor %}
+{% endblock %}
